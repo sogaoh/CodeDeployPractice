@@ -1,0 +1,14 @@
+on: [push]
+
+jobs:
+  increment-pixela-graph:
+    runs-on: ubuntu-latest
+    name: Invoke Pixela increment webhook
+    steps:
+      - name: Invoke webhook
+        uses: ryosms/pixela-webhook-action@v1.0.0
+        id: increment-pixela
+        with:
+          username: ${{ secrets.PIXELA_USERNAME }}
+          token: ${{ secrets.PIXELA_TOKEN }}
+          webhook_hash: ${{ secrets.PIXELA_WEBHOOK_HASH }}
