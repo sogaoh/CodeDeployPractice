@@ -23,7 +23,7 @@ tag:
 
 # ecr login
 ecr-login:
-	aws ecr get-login-password --region ${AWS_DEFAULT_REGION} --profile ${AWS_DEFAULT_PROFILE} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com
+	aws ecr get-login-password --region $(AWS_REGION) | docker login --username AWS --password-stdin $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 
 # push
 push:
