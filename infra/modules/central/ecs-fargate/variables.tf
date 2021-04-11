@@ -20,7 +20,11 @@ variable "ecs_service_name" {}
 ################################
 variable "alb_name" {}
 variable "alb_default_target_name" {}
-//variable "certificate_arn" {}
+variable "certificate_arn" {}
+
+variable "zone_id" {}
+variable "dns_sub_domain" {}
+variable "dns_cname_ttl" {}
 
 
 ################################

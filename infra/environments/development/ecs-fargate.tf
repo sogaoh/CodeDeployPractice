@@ -25,9 +25,13 @@ module "ecs-fargate" {
   ################################
   # ALB
   ################################
+  zone_id =  var.dns_zone_id
+  certificate_arn = var.wc_certificate_arn
+  dns_sub_domain = "dev-codedeploy-practice"
+  dns_cname_ttl = 30
+
   alb_name = "dev-codedeploy-practice-alb"
   alb_default_target_name = "dev-codedeploy-practice-ecs"
-  //certificate_arn = var.certificate_arn
 
   vpc_id = module.network.out_vpc_id
   public_subnet_a_id = module.network.out_public_subnet_a_id
