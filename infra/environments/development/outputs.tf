@@ -86,3 +86,43 @@ output "out_sg_storage_id" {
 output "out_sg_vpc_endpoint_id" {
   value = module.security.out_sg_vpc_endpoint_id
 }
+
+
+################################
+# IAM
+################################
+output "out_ecs_tasks_exec_iam_role_arn" {
+  value = module.ecs-fargate.out_ecs_tasks_exec_iam_role_arn
+}
+
+output "out_ecs_tasks_exec_iam_role_attachments_arns" {
+  value = module.ecs-fargate.out_ecs_tasks_exec_iam_role_attachments_arns
+}
+
+
+################################
+# CloudWatch Log Group
+################################
+output "out_cloudwatch_logs_name" {
+  value = module.ecs-fargate.out_cloudwatch_logs_name
+}
+
+
+################################
+# ECS
+################################
+output "out_ecs_cluster_name" {
+  value = module.ecs-fargate.out_ecs_cluster_name
+}
+
+
+################################
+# ALB
+################################
+output "out_alb_tg_default_name" {
+  value = module.ecs-fargate.out_alb_tg_default_name
+}
+
+output "out_alb_dns" {
+  value = module.ecs-fargate.out_alb_dns
+}
