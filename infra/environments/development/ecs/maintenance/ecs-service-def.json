@@ -26,7 +26,7 @@
       ],
       "subnets": [
         "{{ tfstate `module.network.aws_subnet.private_subnet_a_module.id` }}",
-        "{{ tfstate `module.network.aws_subnet.private_subnet_d_module.id` }}"
+        "{{ tfstate `module.network.aws_subnet.private_subnet_c_module.id` }}"
       ]
     }
   },
