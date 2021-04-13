@@ -1,6 +1,7 @@
 ################################
 # (Common)
 ################################
+variable "account_id" {}
 variable "environment_name" {}
 variable "product_name" {}
 

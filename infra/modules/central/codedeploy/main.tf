@@ -95,12 +95,27 @@ resource "aws_iam_role_policy_attachment" "code_deploy_iam_policy_attachment_mod
 
 # https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/userguide/deployment-type-bluegreen.html#deployment-type-bluegreen-IAM
 # https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/ecs_managed_policies.html
+# https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/codedeploy_IAM_role.html
+# https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/deployment-type-bluegreen.html#deployment-type-bluegreen-IAM
 resource "aws_iam_policy" "blue_green_deploy_iam_policy_module" {
   name = "${var.environment_name}-${var.product_name}-blue_green_deploy-policy"
   policy = data.aws_iam_policy_document.blue_green_deploy_iam_policy_document_module.json
 }
 
 data "aws_iam_policy_document" "blue_green_deploy_iam_policy_document_module" {
+  # *-ecs-task-execution-role
+  statement {
+    actions = [
+      "iam:GetRole",
+      "iam:PassRole"
+    ]
+
+    resources = [
+      "arn:aws:iam::${var.account_id}:role/*-${var.product_name}-ecs-task-execution-role"
+    ]
+  }
+
+  # AmazonECS_FullAccess
   statement {
     effect = "Allow"
 
@@ -220,6 +235,52 @@ data "aws_iam_policy_document" "blue_green_deploy_iam_policy_document_module" {
       "*"
     ]
   }
+
+  # AWSCodeDeployRoleForECS
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "ecs:DescribeServices",
+      "ecs:CreateTaskSet",
+      "ecs:UpdateServicePrimaryTaskSet",
+      "ecs:DeleteTaskSet",
+      "elasticloadbalancing:DescribeTargetGroups",
+      "elasticloadbalancing:DescribeListeners",
+      "elasticloadbalancing:ModifyListener",
+      "elasticloadbalancing:DescribeRules",
+      "elasticloadbalancing:ModifyRule",
+      "lambda:InvokeFunction",
+      "cloudwatch:DescribeAlarms",
+      "sns:Publish",
+      "s3:GetObject",
+      "s3:GetObjectVersion"
+    ]
+
+    resources = [
+      "*"
+    ]
+  }
+
+  statement {
+    actions = [
+      "iam:PassRole"
+    ]
+
+    resources = [
+      "*"
+    ]
+
+    condition {
+      test = "StringLike"
+      values = [
+        "ecs-tasks.amazonaws.com"
+      ]
+      variable = "iam:PassedToService"
+    }
+  }
+
+
 }
 
 resource "aws_iam_role_policy_attachment" "blue_green_deploy_iam_policy_attachment_module" {

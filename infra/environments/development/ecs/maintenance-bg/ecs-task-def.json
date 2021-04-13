@@ -9,7 +9,7 @@
   "containerDefinitions": [
     {
       "name": "{{ must_env `TF_VAR_ECS_SERVICE_NAME_BG` }}",
-      "image": "{{ must_env `ECR_IMAGE_REPO_TAG` }}",
+      "image": "{{ must_env `ECR_IMAGE_REPO` }}{{ must_env `ECR_IMAGE_TAG` }}",
       "portMappings": [
         {
           "containerPort": 80,
