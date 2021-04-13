@@ -36,10 +36,10 @@ output "out_private_subnet_a_cidr_block" {
 }
 
 output "out_private_subnet_d_id" {
-    value = aws_subnet.private_subnet_d_module.id
+    value = aws_subnet.private_subnet_c_module.id
 }
 output "out_private_subnet_d_cidr_block" {
-    value = aws_subnet.private_subnet_d_module.cidr_block
+    value = aws_subnet.private_subnet_c_module.cidr_block
 }
 
 ## Storage
@@ -51,10 +51,10 @@ output "out_storage_subnet_c_cidr_block" {
 }
 
 output "out_storage_subnet_d_id" {
-    value = aws_subnet.storage_subnet_d_module.id
+    value = aws_subnet.storage_subnet_a_module.id
 }
 output "out_storage_subnet_d_cidr_block" {
-    value = aws_subnet.storage_subnet_d_module.cidr_block
+    value = aws_subnet.storage_subnet_a_module.cidr_block
 }
 
 
@@ -90,7 +90,7 @@ output "out_private_rt_a_id" {
   value = aws_route_table.private_rt_a_module.id
 }
 output "out_private_rt_d_id" {
-    value = aws_route_table.private_rt_d_module.id
+    value = aws_route_table.private_rt_c_module.id
 }
 
 ## Storage
@@ -98,7 +98,7 @@ output "out_storage_rt_c_id" {
   value = aws_route_table.storage_rt_c_module.id
 }
 output "out_storage_rt_d_id" {
-    value = aws_route_table.storage_rt_d_module.id
+    value = aws_route_table.storage_rt_a_module.id
 }
 
 

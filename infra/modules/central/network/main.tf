@@ -84,17 +84,17 @@ resource "aws_subnet" "private_subnet_a_module" {
 
 
 ##------------------------------
-## Private D
-resource "aws_subnet" "private_subnet_d_module" {
+## Private C
+resource "aws_subnet" "private_subnet_c_module" {
   vpc_id = aws_vpc.vpc_module.id
-  availability_zone = "ap-northeast-1d"
+  availability_zone = "ap-northeast-1c"
 
-  cidr_block = var.private_subnet_d_cidr_block
+  cidr_block = var.private_subnet_c_cidr_block
   map_public_ip_on_launch = false
   assign_ipv6_address_on_creation = false
 
   tags = {
-    Name = var.private_subnet_d_name
+    Name = var.private_subnet_c_name
     Env = var.tags_env
   }
 }
@@ -117,17 +117,17 @@ resource "aws_subnet" "storage_subnet_c_module" {
 }
 
 ##------------------------------
-## Storage D
-resource "aws_subnet" "storage_subnet_d_module" {
+## Storage A
+resource "aws_subnet" "storage_subnet_a_module" {
   vpc_id = aws_vpc.vpc_module.id
-  availability_zone = "ap-northeast-1d"
+  availability_zone = "ap-northeast-1a"
 
-  cidr_block = var.storage_subnet_d_cidr_block
+  cidr_block = var.storage_subnet_a_cidr_block
   map_public_ip_on_launch = false
   assign_ipv6_address_on_creation = false
 
   tags = {
-    Name = var.storage_subnet_d_name
+    Name = var.storage_subnet_a_name
     Env = var.tags_env
   }
 }
@@ -241,24 +241,24 @@ resource "aws_route_table_association" "private_rt_assoc_a_module" {
 }
 
 ##------------------------------
-## Private D
-resource "aws_route_table" "private_rt_d_module" {
+## Private C
+resource "aws_route_table" "private_rt_c_module" {
   vpc_id = aws_vpc.vpc_module.id
 
   route {
-    cidr_block = var.private_rt_d_cidr_block
+    cidr_block = var.private_rt_c_cidr_block
     nat_gateway_id = aws_nat_gateway.nat_gw_c_module.id
   }
 
   tags = {
-    Name = var.private_rt_d_name
+    Name = var.private_rt_c_name
     Env = var.tags_env
   }
 }
 
-resource "aws_route_table_association" "private_rt_assoc_d_module" {
-  subnet_id = aws_subnet.private_subnet_d_module.id
-  route_table_id = aws_route_table.private_rt_d_module.id
+resource "aws_route_table_association" "private_rt_assoc_c_module" {
+  subnet_id = aws_subnet.private_subnet_c_module.id
+  route_table_id = aws_route_table.private_rt_c_module.id
 }
 
 ##------------------------------
@@ -282,23 +282,23 @@ resource "aws_route_table_association" "storage_rt_assoc_c_module" {
 }
 
 ##------------------------------
-## Storage D
-resource "aws_route_table" "storage_rt_d_module" {
+## Storage A
+resource "aws_route_table" "storage_rt_a_module" {
   vpc_id = aws_vpc.vpc_module.id
 
   route {
-    cidr_block = var.storage_rt_d_cidr_block
-    nat_gateway_id = aws_nat_gateway.nat_gw_c_module.id
+    cidr_block = var.storage_rt_a_cidr_block
+    nat_gateway_id = aws_nat_gateway.nat_gw_a_module.id
   }
 
   tags = {
-    Name = var.storage_rt_d_name
+    Name = var.storage_rt_a_name
     Env = var.tags_env
   }
 }
-resource "aws_route_table_association" "storage_rt_assoc_d_module" {
-  subnet_id = aws_subnet.storage_subnet_d_module.id
-  route_table_id = aws_route_table.storage_rt_d_module.id
+resource "aws_route_table_association" "storage_rt_assoc_a_module" {
+  subnet_id = aws_subnet.storage_subnet_a_module.id
+  route_table_id = aws_route_table.storage_rt_a_module.id
 }
 
 
@@ -334,7 +334,7 @@ resource "aws_vpc_endpoint_route_table_association" "vpc_endpoint_s3_route_a" {
 }
 resource "aws_vpc_endpoint_route_table_association" "vpc_endpoint_s3_route_d" {
   vpc_endpoint_id = aws_vpc_endpoint.vpc_endpoint_s3_module.id
-  route_table_id  = aws_route_table.private_rt_d_module.id
+  route_table_id  = aws_route_table.private_rt_c_module.id
 }
 
 resource "aws_vpc_endpoint_route_table_association" "vpc_endpoint_s3_storage_route_c" {
@@ -343,7 +343,7 @@ resource "aws_vpc_endpoint_route_table_association" "vpc_endpoint_s3_storage_rou
 }
 resource "aws_vpc_endpoint_route_table_association" "vpc_endpoint_s3_storage_route_d" {
   vpc_endpoint_id = aws_vpc_endpoint.vpc_endpoint_s3_module.id
-  route_table_id  = aws_route_table.storage_rt_d_module.id
+  route_table_id  = aws_route_table.storage_rt_a_module.id
 }
 
 

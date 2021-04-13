@@ -19,15 +19,15 @@ variable "public_subnet_c_cidr_block" {}
 variable "private_subnet_a_name" {}
 variable "private_subnet_a_cidr_block" {}
 
-variable "private_subnet_d_name" {}
-variable "private_subnet_d_cidr_block" {}
+variable "private_subnet_c_name" {}
+variable "private_subnet_c_cidr_block" {}
 
 ## Storage
 variable "storage_subnet_c_name" {}
 variable "storage_subnet_c_cidr_block" {}
 
-variable "storage_subnet_d_name" {}
-variable "storage_subnet_d_cidr_block" {}
+variable "storage_subnet_a_name" {}
+variable "storage_subnet_a_cidr_block" {}
 
 
 ################################
@@ -54,15 +54,15 @@ variable "public_rt_cidr_block" {}
 variable "private_rt_a_name" {}
 variable "private_rt_a_cidr_block" {}
 
-variable "private_rt_d_name" {}
-variable "private_rt_d_cidr_block" {}
+variable "private_rt_c_name" {}
+variable "private_rt_c_cidr_block" {}
 
 ## Storage
 variable "storage_rt_c_name" {}
 variable "storage_rt_c_cidr_block" {}
 
-variable "storage_rt_d_name" {}
-variable "storage_rt_d_cidr_block" {}
+variable "storage_rt_a_name" {}
+variable "storage_rt_a_cidr_block" {}
 
 
 ################################
