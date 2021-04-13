@@ -9,6 +9,7 @@ BG_SIDE := green
 IMG_TAG := latest
 
 BLDARG_TZ := --build-arg TZ=Asia/Tokyo
+BLDARG_BG_SIDE := --build-arg BG_SIZE=$(BG_SIDE)
 
 AWS_ACCOUNT_ID :=
 AWS_REGION := ap-northeast-1
@@ -16,7 +17,7 @@ AWS_REGION := ap-northeast-1
 
 # build
 build:
-	docker build --no-cache -t $(PRODUCT_NAME)/maintenance:latest -f ./ship/docker/maintenance-$(BG_SIDE)-html/Dockerfile $(BLDARG_TZ) .
+	docker build --no-cache -t $(PRODUCT_NAME)/maintenance:latest -f ./ship/docker/maintenance-$(BG_SIDE)-html/Dockerfile $(BLDARG_TZ) $(BLDARG_BG_SIDE) .
 
 # tag
 tag:

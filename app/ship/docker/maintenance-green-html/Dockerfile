@@ -14,11 +14,13 @@ RUN apk update && \
   apk add --update --no-cache --virtual=.build-dependencies g++
 
 
+ARG BG_SIDE
+
 # nginx config file
-COPY ship/docker/maintenance-html/default.conf /etc/nginx/conf.d/default.conf
+COPY ship/docker/maintenance-${BG_SIDE}-html/default.conf /etc/nginx/conf.d/default.conf
 
 # copy html
-COPY ship/docker/maintenance-html/public  /usr/share/nginx/html
+COPY ship/docker/maintenance-${BG_SIDE}-html/public  /usr/share/nginx/html
 
 
 WORKDIR /usr/share/nginx/html
