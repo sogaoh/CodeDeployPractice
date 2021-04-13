@@ -9,7 +9,7 @@ BG_SIDE := green
 IMG_TAG := latest
 
 BLDARG_TZ := --build-arg TZ=Asia/Tokyo
-BLDARG_BG_SIDE := --build-arg BG_SIZE=$(BG_SIDE)
+BLDARG_BG_SIDE := --build-arg BG_SIDE=$(BG_SIDE)
 
 AWS_ACCOUNT_ID :=
 AWS_REGION := ap-northeast-1
