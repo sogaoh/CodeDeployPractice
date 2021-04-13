@@ -4,12 +4,12 @@ help:
 	cat Makefile
 
 PRODUCT_NAME := codedeploy-practice
-BG_SIDE := green
 
 IMG_TAG := latest
 
 BLDARG_TZ := --build-arg TZ=Asia/Tokyo
-BLDARG_BG_SIDE := --build-arg BG_SIDE=$(BG_SIDE)
+BLDARG_BG_BLUE  := --build-arg BG_SIDE=blue
+BLDARG_BG_GREEN := --build-arg BG_SIDE=green
 
 AWS_ACCOUNT_ID :=
 AWS_REGION := ap-northeast-1
@@ -17,11 +17,13 @@ AWS_REGION := ap-northeast-1
 
 # build
 build:
-	docker build --no-cache -t $(PRODUCT_NAME)/maintenance:latest -f ./ship/docker/maintenance-$(BG_SIDE)-html/Dockerfile $(BLDARG_TZ) $(BLDARG_BG_SIDE) .
+	docker build --no-cache -t $(PRODUCT_NAME)/maintenance:blue  -f ./ship/docker/maintenance-blue-html/Dockerfile $(BLDARG_TZ) $(BLDARG_BG_BLUE) .
+	docker build --no-cache -t $(PRODUCT_NAME)/maintenance:green -f ./ship/docker/maintenance-green-html/Dockerfile $(BLDARG_TZ) $(BLDARG_BG_GREEN) .
 
 # tag
 tag:
-	docker tag $(PRODUCT_NAME)/maintenance:latest "$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(PRODUCT_NAME)/maintenance:latest"
+	docker tag $(PRODUCT_NAME)/maintenance:blue  "$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(PRODUCT_NAME)/maintenance:blue"
+	docker tag $(PRODUCT_NAME)/maintenance:green "$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(PRODUCT_NAME)/maintenance:green"
 
 # ecr login
 ecr-login:
@@ -29,11 +31,14 @@ ecr-login:
 
 # push
 push:
-	docker push "$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(PRODUCT_NAME)/maintenance:latest"
+	docker push "$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(PRODUCT_NAME)/maintenance:blue"
+	docker push "$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(PRODUCT_NAME)/maintenance:green"
 
 # run
-run:
-	docker run -it $$(docker images | grep $(PRODUCT_NAME)/maintenance | grep latest | awk '{print $$3}') ash
+run-blue:
+	docker run -it $$(docker images | grep $(PRODUCT_NAME)/maintenance | grep blue  | awk '{print $$3}') ash
+run-green:
+	docker run -it $$(docker images | grep $(PRODUCT_NAME)/maintenance | grep green | awk '{print $$3}') ash
 
 
 # up/down
