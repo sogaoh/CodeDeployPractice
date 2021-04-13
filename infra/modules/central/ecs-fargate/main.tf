@@ -194,6 +194,18 @@ resource "aws_lb_target_group" "alb_target_group_default_module" {
   port = 80
   protocol = "HTTP"
 
+  health_check {
+    enabled             = true
+    healthy_threshold   = 5
+    interval            = 30
+    matcher             = 200
+    path                = "/index.html"
+    port                = 80
+    protocol            = "HTTP"
+    timeout             = 5
+    unhealthy_threshold = 2
+  }
+
   tags = {
     Name = var.alb_default_target_name
     Env = var.tags_env
