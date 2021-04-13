@@ -183,7 +183,6 @@ resource "aws_lb_listener" "alb_443_listener_module" {
   protocol = "HTTPS"
 }
 
-
 resource "aws_lb_target_group" "alb_target_group_default_module" {
   name = var.alb_default_target_name
 
@@ -210,6 +209,82 @@ resource "aws_lb_target_group" "alb_target_group_default_module" {
     Name = var.alb_default_target_name
     Env = var.tags_env
   }
+}
+
+resource "aws_route53_record" "route53_CNAME_module" {
+  zone_id = var.zone_id
+  name    = var.dns_sub_domain
+  ttl     = var.dns_cname_ttl
+  type    = "CNAME"
+  records = [
+    aws_lb.alb_module.dns_name,
+  ]
+}
+
+
+resource "aws_lb" "bg_alb_module" {
+  load_balancer_type = "application"
+  name = var.bg_alb_name
+
+  security_groups = [
+    var.sg_public_id
+  ]
+  subnets = [
+    var.public_subnet_a_id,
+    var.public_subnet_c_id,
+  ]
+
+  tags = {
+    Name = var.bg_alb_name
+    Env = var.tags_env
+  }
+}
+
+resource "aws_lb_listener" "bg_alb_80_listener_module" {
+  load_balancer_arn = aws_lb.bg_alb_module.id
+
+  default_action {
+    type = "redirect"
+
+    redirect {
+      port        = 443
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+
+  port = 80
+  protocol = "HTTP"
+}
+
+resource "aws_lb_listener" "alb_bg_first_listener_module" {
+  load_balancer_arn = aws_lb.bg_alb_module.id
+
+  ssl_policy = "ELBSecurityPolicy-TLS-1-2-Ext-2018-06"
+  certificate_arn = var.certificate_arn
+
+  default_action {
+    target_group_arn = aws_lb_target_group.alb_target_group_blue_module.arn
+    type = "forward"
+  }
+
+  port = 443
+  protocol = "HTTPS"
+}
+
+resource "aws_lb_listener" "alb_bg_second_listener_module" {
+  load_balancer_arn = aws_lb.bg_alb_module.id
+
+  ssl_policy = "ELBSecurityPolicy-TLS-1-2-Ext-2018-06"
+  certificate_arn = var.certificate_arn
+
+  default_action {
+    target_group_arn = aws_lb_target_group.alb_target_group_green_module.arn
+    type = "forward"
+  }
+
+  port = 8080
+  protocol = "HTTPS"
 }
 
 resource "aws_lb_target_group" "alb_target_group_blue_module" {
@@ -268,12 +343,12 @@ resource "aws_lb_target_group" "alb_target_group_green_module" {
   }
 }
 
-resource "aws_route53_record" "route53_CNAME_module" {
+resource "aws_route53_record" "route53_bg_CNAME_module" {
   zone_id = var.zone_id
-  name    = var.dns_sub_domain
+  name    = var.dns_bg_sub_domain
   ttl     = var.dns_cname_ttl
   type    = "CNAME"
   records = [
-    aws_lb.alb_module.dns_name,
+    aws_lb.bg_alb_module.dns_name,
   ]
 }

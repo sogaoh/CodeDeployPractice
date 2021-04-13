@@ -1,0 +1,32 @@
+{
+  "cpu": "256",
+  "memory": "512",
+  "requiresCompatibilities": ["FARGATE"],
+  "family": "{{ must_env `TF_VAR_ENV_PRODUCT_NAME` }}_{{ must_env `TF_VAR_ECS_SERVICE_NAME_BG` }}",
+  "taskRoleArn": "{{ tfstate `module.ecs-fargate.aws_iam_role.ecs_tasks_exec_iam_role_module.arn` }}",
+  "executionRoleArn": "{{ tfstate `module.ecs-fargate.aws_iam_role.ecs_tasks_exec_iam_role_module.arn` }}",
+  "networkMode": "awsvpc",
+  "containerDefinitions": [
+    {
+      "name": "{{ must_env `TF_VAR_ECS_SERVICE_NAME_BG` }}",
+      "image": "{{ must_env `ECR_IMAGE_REPO_TAG` }}",
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "readonlyRootFilesystem": false,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "{{ tfstate `module.ecs-fargate.aws_cloudwatch_log_group.ecs_cloudwatch_logs_module.name` }}",
+          "awslogs-region": "{{ must_env `AWS_DEFAULT_REGION` }}",
+          "awslogs-stream-prefix": "maintenance-bg"
+        }
+      }
+    }
+  ]
+}

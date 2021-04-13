@@ -6,3 +6,5 @@ variable "account_id" {}
 
 variable "dns_zone_id" {}
 variable "wc_certificate_arn" {}
+
+variable "ecs_service_name" {}

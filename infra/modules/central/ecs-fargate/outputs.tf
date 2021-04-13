@@ -36,9 +36,21 @@ output "out_ecs_cluster_name" {
 output "out_alb_dns" {
     value = aws_lb.alb_module.dns_name
 }
-
 output "out_alb_tg_default_name" {
     value = aws_lb_target_group.alb_target_group_default_module.name
+}
+
+output "out_bg_alb_dns" {
+  value = aws_lb.bg_alb_module.dns_name
+}
+output "out_bg_alb_arn" {
+  value = aws_lb.bg_alb_module.arn
+}
+output "out_blue_listener_arn" {
+  value = aws_lb_listener.alb_bg_first_listener_module.arn
+}
+output "out_green_listener_arn" {
+  value = aws_lb_listener.alb_bg_second_listener_module.arn
 }
 
 output "out_alb_tg_blue_name" {

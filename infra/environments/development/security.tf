@@ -18,6 +18,9 @@ module "security" {
   sg_public_443_cidr_blocks = [
     "0.0.0.0/0",
   ]
+  sg_public_8080_cidr_blocks = [
+    "0.0.0.0/0",
+  ]
   sg_public_icmp_cidr_blocks = [
     module.network.out_vpc_cidr_block,
   ]
@@ -35,7 +38,7 @@ module "security" {
     module.network.out_vpc_cidr_block,
     "127.0.0.1/32",
   ]
-  sg_private_9000_cidr_blocks = [
+  sg_private_8080_cidr_blocks = [
     module.network.out_vpc_cidr_block,
     "127.0.0.1/32",
   ]

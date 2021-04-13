@@ -38,6 +38,17 @@ resource "aws_security_group_rule" "sg_rule_public_443_module" {
   security_group_id = aws_security_group.sg_public_module.id
 }
 
+resource "aws_security_group_rule" "sg_rule_public_8080_module" {
+  type = "ingress"
+  from_port = 8080
+  to_port = 8080
+  protocol = "tcp"
+  cidr_blocks = var.sg_public_8080_cidr_blocks
+  description = "Public SG ingress HTTPS 8080 Rule"
+
+  security_group_id = aws_security_group.sg_public_module.id
+}
+
 resource "aws_security_group_rule" "sg_rule_public_icmp_module" {
   type = "ingress"
   from_port = -1
@@ -98,13 +109,13 @@ resource "aws_security_group_rule" "sg_rule_private_443_module" {
   security_group_id = aws_security_group.sg_private_module.id
 }
 
-resource "aws_security_group_rule" "sg_rule_private_9000_module" {
+resource "aws_security_group_rule" "sg_rule_private_8080_module" {
   type = "ingress"
-  from_port = 9000
-  to_port = 9000
+  from_port = 8080
+  to_port = 8080
   protocol = "tcp"
-  cidr_blocks = var.sg_private_9000_cidr_blocks
-  description = "Private SG ingress HTTP 9000 Rule"
+  cidr_blocks = var.sg_private_8080_cidr_blocks
+  description = "Private SG ingress HTTP 8080 Rule"
 
   security_group_id = aws_security_group.sg_private_module.id
 }
