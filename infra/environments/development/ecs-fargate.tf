@@ -32,6 +32,8 @@ module "ecs-fargate" {
 
   alb_name = "dev-codedeploy-practice-alb"
   alb_default_target_name = "dev-codedeploy-practice-ecs"
+  alb_blue_target_name = "dev-codedeploy-practice-blue"
+  alb_green_target_name = "dev-codedeploy-practice-green"
 
   vpc_id = module.network.out_vpc_id
   public_subnet_a_id = module.network.out_public_subnet_a_id

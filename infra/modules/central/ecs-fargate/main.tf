@@ -212,6 +212,61 @@ resource "aws_lb_target_group" "alb_target_group_default_module" {
   }
 }
 
+resource "aws_lb_target_group" "alb_target_group_blue_module" {
+  name = var.alb_blue_target_name
+
+  vpc_id = var.vpc_id
+
+  target_type = "ip"
+
+  port = 80
+  protocol = "HTTP"
+
+  health_check {
+    enabled             = true
+    healthy_threshold   = 5
+    interval            = 30
+    matcher             = 200
+    path                = "/index.html"
+    port                = 80
+    protocol            = "HTTP"
+    timeout             = 5
+    unhealthy_threshold = 2
+  }
+
+  tags = {
+    Name = var.alb_blue_target_name
+    Env = var.tags_env
+  }
+}
+
+resource "aws_lb_target_group" "alb_target_group_green_module" {
+  name = var.alb_green_target_name
+
+  vpc_id = var.vpc_id
+
+  target_type = "ip"
+
+  port = 80
+  protocol = "HTTP"
+
+  health_check {
+    enabled             = true
+    healthy_threshold   = 5
+    interval            = 30
+    matcher             = 200
+    path                = "/index.html"
+    port                = 80
+    protocol            = "HTTP"
+    timeout             = 5
+    unhealthy_threshold = 2
+  }
+
+  tags = {
+    Name = var.alb_green_target_name
+    Env = var.tags_env
+  }
+}
 
 resource "aws_route53_record" "route53_CNAME_module" {
   zone_id = var.zone_id

@@ -122,6 +122,12 @@ output "out_ecs_cluster_name" {
 output "out_alb_tg_default_name" {
   value = module.ecs-fargate.out_alb_tg_default_name
 }
+output "out_alb_tg_blue_name" {
+  value = module.ecs-fargate.out_alb_tg_blue_name
+}
+output "out_alb_tg_green_name" {
+  value = module.ecs-fargate.out_alb_tg_green_name
+}
 
 output "out_alb_dns" {
   value = module.ecs-fargate.out_alb_dns

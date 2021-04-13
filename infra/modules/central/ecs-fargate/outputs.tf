@@ -40,3 +40,10 @@ output "out_alb_dns" {
 output "out_alb_tg_default_name" {
     value = aws_lb_target_group.alb_target_group_default_module.name
 }
+
+output "out_alb_tg_blue_name" {
+  value = aws_lb_target_group.alb_target_group_blue_module.name
+}
+output "out_alb_tg_green_name" {
+  value = aws_lb_target_group.alb_target_group_green_module.name
+}
