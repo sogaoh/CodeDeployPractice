@@ -4,6 +4,7 @@ help:
 	cat Makefile
 
 PRODUCT_NAME := codedeploy-practice
+BG_SIDE := green
 
 IMG_TAG := latest
 
@@ -15,7 +16,7 @@ AWS_REGION := ap-northeast-1
 
 # build
 build:
-	docker build --no-cache -t $(PRODUCT_NAME)/maintenance:latest -f ./ship/docker/maintenance-html/Dockerfile $(BLDARG_TZ) .
+	docker build --no-cache -t $(PRODUCT_NAME)/maintenance:latest -f ./ship/docker/maintenance-$(BG_SIDE)-html/Dockerfile $(BLDARG_TZ) .
 
 # tag
 tag:
