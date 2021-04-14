@@ -5,7 +5,7 @@ help:
 
 
 CONF_OPT := --config config.yaml
-
+DEPLOY_OPT := --skip-task-definition --latest-task-definition
 
 verify:
 	ecspresso $(CONF_OPT) verify
@@ -22,21 +22,36 @@ status:
 diff:
 	ecspresso $(CONF_OPT) diff
 
+tasks:
+	ecspresso $(CONF_OPT) tasks
+
+
+dry-register:
+	ecspresso $(CONF_OPT) register --dry-run
+
+register:
+	ecspresso $(CONF_OPT) register
+
 
 dry-deploy:
-	ecspresso $(CONF_OPT) deploy --dry-run
+	ecspresso $(CONF_OPT) deploy --dry-run $(DEPLOY_OPT)
 
 deploy:
-	ecspresso $(CONF_OPT) deploy
+	ecspresso $(CONF_OPT) deploy $(DEPLOY_OPT) --no-wait
+	ecspresso $(CONF_OPT) wait
 
-rollback:
-	ecspresso $(CONF_OPT) rollback --deregister-task-definition
+appspec:
+	ecspresso $(CONF_OPT) appspec
 
-dry-rollback:
-	ecspresso $(CONF_OPT) rollback --dry-run
 
-soft-rollback:
-	ecspresso $(CONF_OPT) rollback
+#rollback:
+#	ecspresso $(CONF_OPT) rollback --deregister-task-definition
+#
+#dry-rollback:
+#	ecspresso $(CONF_OPT) rollback --dry-run
+#
+#soft-rollback:
+#	ecspresso $(CONF_OPT) rollback
 
 
 scale1:
