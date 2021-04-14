@@ -27,12 +27,12 @@ module "ecs-fargate" {
   ################################
   zone_id =  var.dns_zone_id
   certificate_arn = var.wc_certificate_arn
-  dns_sub_domain = "dev-codedeploy-practice"
+  //dns_sub_domain = "dev-codedeploy-practice"
   dns_bg_sub_domain = "dev-codedeploy-practice-bg"
   dns_cname_ttl = 3600
 
-  alb_name = "dev-codedeploy-practice-alb"
-  alb_default_target_name = "dev-codedeploy-practice-ecs"
+  //alb_name = "dev-codedeploy-practice-alb"
+  //alb_default_target_name = "dev-codedeploy-practice-ecs"
 
   bg_alb_name = "dev-codedeploy-practice-bg-alb"
   alb_blue_target_name = "dev-codedeploy-practice-blue"

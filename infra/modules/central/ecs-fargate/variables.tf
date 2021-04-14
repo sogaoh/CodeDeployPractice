@@ -18,15 +18,15 @@ variable "ecs_service_name" {}
 ################################
 # ALB
 ################################
-variable "alb_name" {}
-variable "alb_default_target_name" {}
+//variable "alb_name" {}
+//variable "alb_default_target_name" {}
 variable "bg_alb_name" {}
 variable "alb_blue_target_name" {}
 variable "alb_green_target_name" {}
 variable "certificate_arn" {}
 
 variable "zone_id" {}
-variable "dns_sub_domain" {}
+//variable "dns_sub_domain" {}
 variable "dns_bg_sub_domain" {}
 variable "dns_cname_ttl" {}
 
