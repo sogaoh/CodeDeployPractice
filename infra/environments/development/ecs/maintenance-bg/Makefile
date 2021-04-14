@@ -6,6 +6,7 @@ help:
 
 CONF_OPT := --config config.yaml
 DEPLOY_OPT := --skip-task-definition --latest-task-definition
+APPSPEC_OPT := current
 
 verify:
 	ecspresso $(CONF_OPT) verify
@@ -41,7 +42,7 @@ deploy:
 	ecspresso $(CONF_OPT) wait
 
 appspec:
-	ecspresso $(CONF_OPT) appspec
+	ecspresso $(CONF_OPT) appspec --task-definition=$(APPSPEC_OPT)
 
 
 #rollback:
