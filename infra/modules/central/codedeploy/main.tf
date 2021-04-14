@@ -22,7 +22,8 @@ resource "aws_codedeploy_deployment_group" "code_deploy_group_module" {
 
   blue_green_deployment_config {
     deployment_ready_option {
-      action_on_timeout = "CONTINUE_DEPLOYMENT"
+      action_on_timeout    = "STOP_DEPLOYMENT"
+      wait_time_in_minutes = 60
     }
 
     terminate_blue_instances_on_deployment_success {
@@ -44,7 +45,11 @@ resource "aws_codedeploy_deployment_group" "code_deploy_group_module" {
   load_balancer_info {
     target_group_pair_info {
       prod_traffic_route {
-        listener_arns = var.alb_listener_arns
+        listener_arns = var.alb_primary_listener_arn
+      }
+
+      test_traffic_route {
+        listener_arns = var.alb_secondary_listener_arn
       }
 
       target_group {

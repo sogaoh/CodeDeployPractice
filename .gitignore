@@ -7,3 +7,11 @@
 /infra/*/*/*.tfvars.*
 /infra/*/*/*.tfstate
 /infra/*/*/*.tfstate.*
+/infra/*/*/*/.terraform
+/infra/*/*/*/terraform.d
+/infra/*/*/*/generated
+/infra/*/*/*/*.tfvars
+/infra/*/*/*/*.tfvars.*
+/infra/*/*/*/*.tfstate
+/infra/*/*/*/*.tfstate.*
+/infra/*/*/*/*/.envrc

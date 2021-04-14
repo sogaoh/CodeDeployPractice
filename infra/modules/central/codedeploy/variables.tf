@@ -22,6 +22,7 @@ variable "tags_env" {}
 ## external
 variable "ecs_cluster_name" {}
 variable "ecs_service_name" {}
-variable "alb_listener_arns" {}
+variable "alb_primary_listener_arn" {}
+variable "alb_secondary_listener_arn" {}
 variable "target_group_blue_name" {}
 variable "target_group_green_name" {}
