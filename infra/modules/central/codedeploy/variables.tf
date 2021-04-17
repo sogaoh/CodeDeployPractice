@@ -11,6 +11,7 @@ variable "product_name" {}
 ################################
 variable "code_deploy_app_name" {}
 variable "code_deploy_group_name" {}
+variable "wait_time_in_minutes" {}
 
 
 ################################

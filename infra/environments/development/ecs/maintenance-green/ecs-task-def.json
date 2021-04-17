@@ -24,7 +24,7 @@
         "options": {
           "awslogs-group": "{{ tfstate `module.ecs-fargate.aws_cloudwatch_log_group.ecs_cloudwatch_logs_module.name` }}",
           "awslogs-region": "{{ must_env `AWS_DEFAULT_REGION` }}",
-          "awslogs-stream-prefix": "maintenance-bg"
+          "awslogs-stream-prefix": "maintenance-green"
         }
       }
     }

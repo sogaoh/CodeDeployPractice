@@ -125,10 +125,10 @@ output "out_alb_tg_blue_name" {
 output "out_alb_tg_green_name" {
   value = module.ecs-fargate.out_alb_tg_green_name
 }
-output "out_primary_listener_arn" {
+output "out_alb_listener_primary_arn" {
   value = module.ecs-fargate.out_primary_listener_arn
 }
-output "out_secondary_listener_arn" {
+output "out_alb_listener_secondary_arn" {
   value = module.ecs-fargate.out_secondary_listener_arn
 }
 output "out_bg_alb_dns" {

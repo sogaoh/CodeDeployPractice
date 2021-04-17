@@ -1,7 +1,7 @@
 region: ap-northeast-1
 cluster: dev-codedeploy-practice
 service: maintenance-bg
-service_definition: ecs-service-def.json
+service_definition: ../maintenance-bg/ecs-service-def.json
 task_definition: ecs-task-def.json
 timeout: 10m
 plugins:
