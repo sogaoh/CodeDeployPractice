@@ -102,6 +102,7 @@ export AWS_DEFAULT_REGION="<YOUR_REGION>"
 
 export TF_VAR_ENV_PRODUCT_NAME="dev-codedeploy-practice"
 export TF_VAR_ECS_SERVICE_NAME_BG="maintenance-bg"
+export TF_VAR_ECS_SERVICE_NAME_BACK="backend-blue"
 
 export ECR_IMAGE_REPO="<YOUR_AWS_ACCOUNT_ID>.dkr.ecr.<YOUR_REGION>.amazonaws.com/codedeploy-practice/maintenance:"
 export ECR_IMAGE_TAG="blue"
@@ -139,6 +140,7 @@ export AWS_DEFAULT_REGION="<YOUR_REGION>"
 
 export TF_VAR_ENV_PRODUCT_NAME="dev-codedeploy-practice"
 export TF_VAR_ECS_SERVICE_NAME_BG="maintenance-bg"
+export TF_VAR_ECS_SERVICE_NAME_BACK="backend-green"
 
 export ECR_IMAGE_REPO="<YOUR_AWS_ACCOUNT_ID>.dkr.ecr.<YOUR_REGION>.amazonaws.com/codedeploy-practice/maintenance:"
 export ECR_IMAGE_TAG="green"
