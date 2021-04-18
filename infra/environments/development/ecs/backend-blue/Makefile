@@ -35,10 +35,12 @@ register:
 
 
 dry-deploy:
-	ecspresso $(CONF_OPT) deploy --dry-run $(DEPLOY_OPT)
+	ecspresso $(CONF_OPT) deploy --dry-run
+	#ecspresso $(CONF_OPT) deploy --dry-run $(DEPLOY_OPT)
 
 deploy:
-	ecspresso $(CONF_OPT) deploy $(DEPLOY_OPT) --no-wait
+	ecspresso $(CONF_OPT) deploy
+	#ecspresso $(CONF_OPT) deploy $(DEPLOY_OPT) --no-wait
 	#ecspresso $(CONF_OPT) wait
 
 appspec:
